@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
-    <ToDoList/>
+  <div id="app" data-app>
+   <v-app>
+     <router-view />
+   </v-app>
+      
   </div>
 </template>
 
 <script>
-import ToDoList from './components/ToDoList.vue'
+// import ToDoList from './components/ToDoList.vue'
 export default {
   name: 'App',
-  components: {
-    ToDoList
-  }
-}
+};
 </script>
 
 <style>
@@ -21,6 +21,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
+
+} 
 </style>
