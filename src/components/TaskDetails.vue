@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="container-task-details">
         <v-row justify="center" align="center" style="min-height: 80vh">
             <v-col cols="12" sm="8" md="6">
                 <v-card elevation="6" class="pa-4">
@@ -9,7 +9,8 @@
 
                     <v-divider class="my-3"></v-divider>
 
-                    <div style="display: flex;flex-direction: column;align-items: flex-start;padding-left: 20%;" v-if="task">
+                    <div style="display: flex;flex-direction: column;align-items: flex-start;padding-left: 20%;"
+                        v-if="task">
                         <div class="mb-3">
                             <strong>Task:</strong> {{ task.taskName }}
                         </div>
@@ -30,7 +31,7 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" @click="$router.push('/')">
+                        <v-btn color="primary" @click="$router.push({ name: 'toDoList', params: { userId: userId } })">
                             <v-icon left>mdi-arrow-left</v-icon>
                             Back to list
                         </v-btn>
@@ -43,14 +44,14 @@
 
 <script>
 export default {
-    props: ['index'],
+    props: ['index', 'userId'],
     data() {
         return {
             task: null
         };
     },
     created() {
-        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        const tasks = this.$store.getters.userTasks;
         this.task = tasks?.[this.index];
     },
     methods: {
@@ -69,6 +70,11 @@ export default {
 </script>
 
 <style scoped>
+.container-task-details {
+    height: 100vh;
+    background-color: #1976d2;
+}
+
 .mb-3 {
     margin-bottom: 12px;
 }

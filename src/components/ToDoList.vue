@@ -3,8 +3,13 @@
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <v-card class="pa-4 elevation-10">
-                    <v-card-title class="headline font-weight-bold primary white--text">
-                        My To Do List
+                    <v-card-title
+                        class="headline font-weight-bold primary white--text d-flex justify-space-between align-center">
+                        <span>Welcome to {{ currentUserName }}'s To Do List</span>
+                        <v-btn small color="white" class="ml-2" @click="logout">
+                            <v-icon left color="primary">mdi-logout</v-icon>
+                            Logout
+                        </v-btn>
                     </v-card-title>
                 </v-card>
             </v-col>
@@ -13,8 +18,8 @@
             <v-col cols="12" md="10">
                 <v-form>
                     <v-text-field v-model="task.taskName" label="Task name" prepend-inner-icon="mdi-pencil"
-                        :error="taskError" :rules="[v => !!v || 'The task name is required']" outlined dense
-                        class="mb-4" />
+                        :error="taskError" :error-messages="taskError ? ['The task name is required'] : []" outlined
+                        dense class="mb-4" />
                     <v-text-field v-model="task.taskDescription" label="Task description" prepend-inner-icon="mdi-text"
                         outlined dense />
                     <v-btn color="primary" class="mt-3" @click="addTask" elevation="2">
@@ -27,14 +32,14 @@
         <!-- Liste des tâches -->
         <v-row justify="center" class="mt-5">
             <v-col cols="12" md="10">
-                <v-card elevation="5" v-if="tasksList.length > 0" class="task-scroll-wrapper">
+                <v-card elevation="5" v-if="userTasks.length > 0" class="task-scroll-wrapper">
                     <v-list dense>
-                        <v-list-item v-for="(taskItem, index) in tasksList" :key="index" class="py-2"
+                        <v-list-item v-for="(taskItem, index) in userTasks" :key="index" class="py-2"
                             :class="{ 'task-done': taskItem.taskDone }">
                             <v-row align="center" no-gutters class="w-100">
                                 <v-col cols="1">
                                     <v-checkbox v-model="taskItem.taskDone" style="color:#6ebe8d !important"
-                                        hide-details @change="saveTasksToLocalStorage" />
+                                        hide-details @change="toggleTaskStatus" />
                                 </v-col>
 
                                 <v-col cols="8">
@@ -70,7 +75,7 @@
                 </v-card-title>
                 <v-card-text style="font-size: 20px; text-align: center;">
                     Are you sure you want to delete the task
-                    <strong>{{ tasksList[taskToDeleteIndex]?.taskName }}</strong>?
+                    <strong>{{ userTasks[taskToDeleteIndex]?.taskName }}</strong>?
 
                 </v-card-text>
                 <v-divider></v-divider>
@@ -95,7 +100,7 @@ export default {
     props: ['userId'],
     data() {
         return {
-            tasksList: [],
+            // tasksList: [],
             task: {
                 taskName: "",
                 taskDescription: "",
@@ -116,26 +121,41 @@ export default {
         }
     },
     created() {
-        let savedTasks = localStorage.getItem("tasks");
-        if (savedTasks) {
-            this.tasksList = JSON.parse(savedTasks);
+        const user = this.$store.state.users.find(u => u.id === this.userId);
+
+        if (!user) {
+            this.$router.replace('/');
+        } else {
+            this.$store.commit('setCurrentUser', this.userId);
+        }
+
+    },
+    computed: {
+        userTasks() {
+            return this.$store.getters.userTasks;
+        },
+        currentUserName() {
+            // fixme erreur dans la console
+            return this.$store.getters.currentUser.name.toUpperCase();
         }
     },
     methods: {
         addTask() {
             if (this.task.taskName.trim().length > 0) {
-                this.tasksList.push({
-                    ...this.task,
-                    createdAt: new Date().toISOString()
-                });
+                this.$store.commit('addTask', {
+                    userId: this.userId,
+                    task: {
+                        ...this.task, createdAt: new Date().toISOString()
+                    }
+                })
 
                 this.task = {
                     taskName: "",
                     taskDescription: "",
                     taskDone: false,
                 }
+
                 this.taskError = false;
-                localStorage.setItem("tasks", JSON.stringify(this.tasksList));
 
             } else
                 this.taskError = true;
@@ -148,15 +168,23 @@ export default {
         },
         confirmDelete() {
             if (this.taskToDeleteIndex !== null) {
-                this.tasksList.splice(this.taskToDeleteIndex, 1);
-                localStorage.setItem("tasks", JSON.stringify(this.tasksList));
+                this.$store.commit('deleteTask', {
+                    userId: this.userId,
+                    taskIndex: this.taskToDeleteIndex,
+                })
+
                 this.taskToDeleteIndex = null;
             }
             this.deleteTaskDialog = false;
         },
-        saveTasksToLocalStorage() {
-            localStorage.setItem("tasks", JSON.stringify(this.tasksList));
+        toggleTaskStatus() {
+        
         },
+        logout() {
+            this.$store.commit("setCurrentUser", null);
+            // this.$router.push('/');
+
+        }
 
 
     }
@@ -165,59 +193,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-/* .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.task-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin: 20px; 
-}*/
-
-/* .task-fields label {
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.task-fields input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-} */
-
-/* .error-msg {
-    background-color: white;
-    color: red;
-    font-size: 0.9em;
-} */
-
-
-/* .empty-field {
-    border: red solid 2px !important;
-} */
-
-/* .list-container ul {
-    list-style: none;
-    padding: 0;
-}
-
-.list-container li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
-
 .task-scroll-wrapper {
     max-height: 400px;
     overflow-y: auto;
