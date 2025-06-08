@@ -1,5 +1,5 @@
 <template>
-    <v-container class="container-task-details">
+    <div  class="task-details-container">
         <v-row justify="center" align="center" style="min-height: 80vh">
             <v-col cols="12" sm="8" md="6">
                 <v-card elevation="6" class="pa-4">
@@ -39,7 +39,7 @@
                 </v-card>
             </v-col>
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <script>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.container-task-details {
+.task-details-container {
     height: 100vh;
     background-color: #1976d2;
 }

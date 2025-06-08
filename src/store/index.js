@@ -33,14 +33,15 @@ export default new Vuex.Store({
             if (user) {
                 user.tasks.splice(payload.taskIndex, 1);
                 localStorage.setItem("users", JSON.stringify(state.users))
-
+            }
+        },
+        toggleStatusTask(state, payload) {
+            const user = state.users.find(u => u.id === payload.userId);
+            if (user && user.tasks[payload.taskIndex]) {
+                user.tasks[payload.taskIndex].taskDone = payload.newStatus;
+                localStorage.setItem("users", JSON.stringify(state.users));
             }
 
-
-
-        },
-        toggleStatusTask(){
-            
         }
     }
 })

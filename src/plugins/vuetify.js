@@ -8,7 +8,7 @@ export default new Vuetify({
         themes: {
             light: {
                 primary: '#1976D2',
-                error: '#f44336', // 👈 doit exister ici
+                error: '#f44336', 
                 grey: '#9e9e9e',
             },
         },

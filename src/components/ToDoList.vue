@@ -1,11 +1,11 @@
 <template>
-    <v-container>
+    <v-container class="to-do-list-container">
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <v-card class="pa-4 elevation-10">
-                    <v-card-title
+                    <v-card-title v-if="currentUser"
                         class="headline font-weight-bold primary white--text d-flex justify-space-between align-center">
-                        <span>Welcome to {{ currentUserName }}'s To Do List</span>
+                        <span>Welcome to your To Do List {{ currentUserName }} </span>
                         <v-btn small color="white" class="ml-2" @click="logout">
                             <v-icon left color="primary">mdi-logout</v-icon>
                             Logout
@@ -39,7 +39,7 @@
                             <v-row align="center" no-gutters class="w-100">
                                 <v-col cols="1">
                                     <v-checkbox v-model="taskItem.taskDone" style="color:#6ebe8d !important"
-                                        hide-details @change="toggleTaskStatus" />
+                                        hide-details @change="toggleTaskStatus(index, taskItem.taskDone)" />
                                 </v-col>
 
                                 <v-col cols="8">
@@ -100,7 +100,6 @@ export default {
     props: ['userId'],
     data() {
         return {
-            // tasksList: [],
             task: {
                 taskName: "",
                 taskDescription: "",
@@ -134,9 +133,11 @@ export default {
         userTasks() {
             return this.$store.getters.userTasks;
         },
+        currentUser() {
+            return this.$store.getters.currentUser;
+        },
         currentUserName() {
-            // fixme erreur dans la console
-            return this.$store.getters.currentUser.name.toUpperCase();
+            return this.currentUser.name.toUpperCase();
         }
     },
     methods: {
@@ -177,12 +178,16 @@ export default {
             }
             this.deleteTaskDialog = false;
         },
-        toggleTaskStatus() {
-        
+        toggleTaskStatus(index, newStatus) {
+            this.$store.commit("toggleStatusTask", {
+                userId: this.userId,
+                taskIndex: index,
+                newStatus: newStatus
+            })
         },
         logout() {
             this.$store.commit("setCurrentUser", null);
-            // this.$router.push('/');
+            this.$router.push('/');
 
         }
 
@@ -193,6 +198,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.to-do-list-container {
+    height: 100%;
+    background-color: white;
+}
+
 .task-scroll-wrapper {
     max-height: 400px;
     overflow-y: auto;
