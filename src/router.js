@@ -8,8 +8,8 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
-    { path: '/', component: UserLogin },
-    { path: '/user/:userId', name:'toDoList', component: ToDoList , props: true},
+    { path: '/', name: 'login', component: UserLogin },
+    { path: '/user/:userId', name: 'toDoList', component: ToDoList, props: true },
     { path: '/task/:index', name: 'taskDetails', component: TaskDetails, props: true }
   ]
 });

@@ -1,0 +1,27 @@
+{
+  "loginTitle": "Welcome",
+  "loginSubtitle": "Please enter your name to start",
+  "enterNameLabel": "Enter your name",
+  "nameRequiredError": "The name is required",
+  "startButton": "Start",
+  "taskDetailsTitle": "Task Details",
+  "taskLabel": "Task:",
+  "descriptionLabel": "Description:",
+  "statusLabel": "Status:",
+  "statusDone": "✅ Done",
+  "statusToDo": "❌ To Do",
+  "createdAtLabel": "Created at:",
+  "backToList": "Back to list",
+  "welcomeTitle": "Welcome to your To Do List",
+  "logout": "Logout",
+  "taskNameLabel": "Task name",
+  "taskDescriptionLabel": "Task description",
+  "taskNameRequired": "The task name is required",
+  "addTask": "Add a task",
+  "noTasks": "No tasks added yet.",
+  "confirmDeletion": "Confirm Deletion",
+  "confirmDeleteMessage": "Are you sure you want to delete the task",
+  "confirmDeleteButton": "Yes, delete",
+  "cancel": "Cancel"
+
+}

@@ -1,4 +1,16 @@
-# todolist
+# 📝 ToDoList App
+
+A simple and responsive task management application built with **Vue 2** and **Vuetify**, supporting multiple users and multilingual interface (English 🇬🇧 / French 🇫🇷).  
+Each user has their own task list stored locally via `localStorage`.
+
+## 🚀 Features
+
+- ✅ Create, update, and delete tasks
+- ✅ Track task completion status (done / to-do)
+- ✅ Multi-user support via localStorage
+- ✅ Language selector (English / French) with persistence
+- ✅ Responsive design using Vuetify
+- ✅ Persistent data across sessions using fixed po
 
 ## Project setup
 ```
@@ -23,23 +35,6 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-<!-- 
-
-Le localStorage est lié au nom de domaine ET au port.
-
-Par exemple :
-
-http://localhost:8080 ≠ http://127.0.0.1:8080
-
-http://localhost:8080 ≠ http://localhost:5173
-
-👉 Si tu ouvres ton app sur un autre port, le navigateur considère que c’est une autre app, donc un localStorage vide.
-
-🧪 Test : va sur Application → localStorage dans les DevTools, et vérifie pour quelle URL c’est stocké.
-j ai fixe le port dans le file vue.congig.js afin de garder les donnees de mon localStorage 
-👉 Si tu ouvres ton app sur un autre port, le navigateur considère que c’est une autre app, donc un localStorage vide. -->
-
-
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
@@ -47,17 +42,19 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 🔐 LocalStorage Management
 
-`localStorage` is tied to both the **domain and the port**.
+This app uses localStorage to persist user and task data across sessions.
 
-For example:
+⚠️ localStorage is domain + port specific, which means:
 
-- `http://localhost:8080` ≠ `http://127.0.0.1:8080`
-- `http://localhost:8080` ≠ `http://localhost:5173`
+http://localhost:8080 ≠ http://127.0.0.1:8080
 
-👉 If you open your app on a different port, the browser treats it as a different application, resulting in an empty `localStorage`.
+http://localhost:8080 ≠ http://localhost:5173
 
-🧪 You can check this in **DevTools → Application tab → localStorage**, and see which URL it is associated with.
+👉 If you open the app on a different port or hostname, your data will appear missing because the browser treats it as a separate app.
 
-✅ **I fixed the port in `vue.config.js` (port 8080)** to ensure that `localStorage` data is preserved across sessions, even after restarting the app.
-"""
+✅ To avoid this, the port is explicitly fixed to 3000 using vue.config.js, ensuring consistent localStorage behavior.
+
+🔍 You can inspect stored data via:
+DevTools → Application tab → Local Storage
+
 

@@ -3,15 +3,14 @@
         <v-card class="pa-6 elevation-12 login-card" max-width="400">
             <v-card-title class="justify-center">
                 <v-icon color="primary" class="mr-2">mdi-account-circle</v-icon>
-                <span class="headline font-weight-bold">Welcome</span>
+                <span class="headline font-weight-bold">{{ $t('loginTitle') }}</span>
             </v-card-title>
             <v-card-subtitle class="text-center mb-4">
-                Please enter your name to start
-            </v-card-subtitle>
-            <v-text-field v-model="username" autofocus label="Enter your name" outlined dense autocomplete="name"
-                :error="usernameError" :error-messages="usernameError ? ['The name is required'] : []" />
+                {{ $t('loginSubtitle') }} </v-card-subtitle>
+            <v-text-field v-model="username" autofocus :label="$t('enterNameLabel')" outlined dense autocomplete="name"
+                :error="usernameError" :error-messages="usernameError ? [$t('nameRequiredError')] : []" />
             <v-btn color="primary" class="mt-2" @click="loginOrCreate">
-                Start
+                {{ $t('startButton') }}
             </v-btn>
         </v-card>
     </div>

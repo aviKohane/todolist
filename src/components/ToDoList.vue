@@ -1,15 +1,13 @@
 <template>
     <v-container class="to-do-list-container">
+    
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <v-card class="pa-4 elevation-10">
                     <v-card-title v-if="currentUser"
                         class="headline font-weight-bold primary white--text d-flex justify-space-between align-center">
-                        <span>Welcome to your To Do List {{ currentUserName }} </span>
-                        <v-btn small color="white" class="ml-2" @click="logout">
-                            <v-icon left color="primary">mdi-logout</v-icon>
-                            Logout
-                        </v-btn>
+                        <span>{{ $t('welcomeTitle') }} {{ currentUserName }} </span>
+
                     </v-card-title>
                 </v-card>
             </v-col>
@@ -17,15 +15,14 @@
         <v-row justify="center">
             <v-col cols="12" md="10">
                 <v-form>
-                    <v-text-field v-model="task.taskName" label="Task name" prepend-inner-icon="mdi-pencil"
-                        :error="taskError" :error-messages="taskError ? ['The task name is required'] : []" outlined
-                        dense class="mb-4" />
-                    <v-text-field v-model="task.taskDescription" label="Task description" prepend-inner-icon="mdi-text"
-                        outlined dense />
+                    <v-text-field v-model="task.taskName" :label="$t('taskNameLabel')" prepend-inner-icon="mdi-pencil"
+                        :error="taskError" :error-messages="taskError ? [$t('taskNameRequired')] : []" outlined dense
+                        class="mb-4" />
+                    <v-text-field v-model="task.taskDescription" :label="$t('taskDescriptionLabel')"
+                        prepend-inner-icon="mdi-text" outlined dense />
                     <v-btn color="primary" class="mt-3" @click="addTask" elevation="2">
                         <v-icon left>mdi-plus</v-icon>
-                        Add a task
-                    </v-btn>
+                        {{ $t('addTask') }} </v-btn>
                 </v-form>
             </v-col>
         </v-row>
@@ -61,7 +58,7 @@
                     </v-list>
                 </v-card>
                 <div v-else class="text-center grey--text text--darken-1 mt-5">
-                    No tasks added yet.
+                    {{ $t('noTasks') }}
                 </div>
             </v-col>
         </v-row>
@@ -71,10 +68,10 @@
             <v-card>
                 <v-card-title class="headline" style="color:red">
                     <v-icon left style="color:red" class="mr-2">mdi-alert-circle</v-icon>
-                    Confirm Deletion
+                    {{ $t('confirmDeletion') }}
                 </v-card-title>
                 <v-card-text style="font-size: 20px; text-align: center;">
-                    Are you sure you want to delete the task
+                    {{ $t('confirmDeleteMessage') }}
                     <strong>{{ userTasks[taskToDeleteIndex]?.taskName }}</strong>?
 
                 </v-card-text>
@@ -83,10 +80,11 @@
                     <v-spacer></v-spacer>
                     <v-btn style="color:red" @click="confirmDelete">
                         <v-icon left>mdi-delete</v-icon>
-                        Yes, delete
+                        {{ $t('confirmDeleteButton') }}
                     </v-btn>
                     <v-btn color="grey" @click="deleteTaskDialog = false">
-                        Cancel
+                        {{ $t('cancel') }}
+
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -185,11 +183,7 @@ export default {
                 newStatus: newStatus
             })
         },
-        logout() {
-            this.$store.commit("setCurrentUser", null);
-            this.$router.push('/');
-
-        }
+      
 
 
     }
