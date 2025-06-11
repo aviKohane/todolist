@@ -20,7 +20,7 @@
   "addTask": "Agregar tarea",
   "noTasks": "Aún no se han agregado tareas.",
   "confirmDeletion": "Confirmar eliminación",
-  "confirmDeleteMessage": "¿Estás seguro de que deseas eliminar la tarea?",
+  "confirmDeleteMessage": "¿Estás seguro de que deseas eliminar la tarea",
   "confirmDeleteButton": "Sí, eliminar",
   "cancel": "Cancelar"
 }

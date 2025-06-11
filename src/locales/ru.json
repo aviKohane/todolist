@@ -20,7 +20,7 @@
   "addTask": "Добавить задачу",
   "noTasks": "Задачи пока не добавлены.",
   "confirmDeletion": "Подтвердить удаление",
-  "confirmDeleteMessage": "Вы уверены, что хотите удалить задачу?",
+  "confirmDeleteMessage": "Вы уверены, что хотите удалить задачу",
   "confirmDeleteButton": "Да, удалить",
   "cancel": "Отмена"
 }

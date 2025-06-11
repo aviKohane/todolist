@@ -20,7 +20,7 @@
   "addTask": "Aufgabe hinzufügen",
   "noTasks": "Noch keine Aufgaben hinzugefügt.",
   "confirmDeletion": "Löschen bestätigen",
-  "confirmDeleteMessage": "Sind Sie sicher, dass Sie die Aufgabe löschen möchten?",
+  "confirmDeleteMessage": "Sind Sie sicher, dass Sie die Aufgabe löschen möchten",
   "confirmDeleteButton": "Ja, löschen",
   "cancel": "Abbrechen"
 }
