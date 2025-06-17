@@ -4,7 +4,7 @@
       <div class="btn-wrapper" v-if="showLogout">
         <v-btn class="top-btn" color="white" @click="logout">
           <v-icon left color="primary">mdi-logout</v-icon>
-          {{ $t('logout') }}
+          <span class="logout-label">{{ $t('logout') }}</span>
         </v-btn>
       </div>
       <v-spacer />
@@ -14,13 +14,13 @@
           <template v-slot:item="data">
             <div class="d-flex align-center">
               <img :src="data.item.flag" alt="flag" width="20" class="mr-2" />
-              <span>{{ data.item.label }}</span>
+              <span class="lang-label">{{ data.item.label }}</span>
             </div>
           </template>
           <template v-slot:selection="data">
             <div class="d-flex align-center">
               <img :src="data.item.flag" alt="flag" width="20" class="mr-2" />
-              <span>{{ data.item.label }}</span>
+              <span class="lang-label">{{ data.item.label }}</span>
             </div>
           </template>
         </v-select>
@@ -88,6 +88,14 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .app-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -139,5 +147,43 @@ export default {
 .select-wrapper .v-input__control {
   height: 40px;
   min-height: 40px;
+
+}
+
+@media(max-width:550px) {
+
+  .btn-wrapper,
+  .select-wrapper {
+    width: 140px;
+  }
+
+  .btn-wrapper {
+    margin-right: 10px;
+  }
+
+  .select-wrapper {
+    margin-left: 10px;
+  }
+
+
+}
+
+@media (max-width: 550px) {
+  .lang-label {
+    /* display: none !important; */
+    font-size: 10px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40px;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 550px) {
+  .logout-label {
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
 }
 </style>

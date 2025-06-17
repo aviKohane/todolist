@@ -22,5 +22,20 @@
   "confirmDeletion": "Confirmar eliminación",
   "confirmDeleteMessage": "¿Estás seguro de que deseas eliminar la tarea",
   "confirmDeleteButton": "Sí, eliminar",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "noTasksMatchFilters": "Ninguna tarea coincide con los filtros.",
+  "noTasksYet": "Aún no se han añadido tareas.",
+  "filterByStatus": "Filtrar por estado",
+  "search": "Buscar",
+  "statusAll": "Todas",
+  "todo": "Por hacer",
+  "done": "Hechas",
+  "priorityHigh": "Prioridad alta",
+  "priorityMedium": "Prioridad media",
+  "priorityLow": "Prioridad baja",
+  "taskPriorityLabel": "Prioridad de la tarea",
+  "high": "Alto(a)",
+  "medium": "Medio(a)",
+  "low": "Bajo(a)",
+  "filterByPriority": "Filtrar por prioridad"
 }

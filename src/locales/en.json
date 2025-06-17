@@ -7,6 +7,7 @@
   "taskDetailsTitle": "Task Details",
   "taskLabel": "Task:",
   "descriptionLabel": "Description:",
+  "priorityLabel": "Priority:",
   "statusLabel": "Status:",
   "statusDone": "✅ Done",
   "statusToDo": "❌ To Do",
@@ -22,6 +23,20 @@
   "confirmDeletion": "Confirm Deletion",
   "confirmDeleteMessage": "Are you sure you want to delete the task",
   "confirmDeleteButton": "Yes, delete",
-  "cancel": "Cancel"
-
+  "cancel": "Cancel",
+  "noTasksMatchFilters": "No tasks match your filters.",
+  "noTasksYet": "No tasks added yet.",
+  "filterByStatus": "Filter by status",
+  "search": "Search",
+  "statusAll": "All",
+  "todo": "To Do",
+  "done": "Done",
+  "priorityHigh": "High priority",
+  "priorityMedium": "Medium priority",
+  "priorityLow": "Low priority",
+  "taskPriorityLabel": "Task priority",
+  "high": "High",
+  "medium": "Medium",
+  "low": "Low",
+  "filterByPriority": "Filter by priority"
 }

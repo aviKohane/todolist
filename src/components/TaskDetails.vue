@@ -1,7 +1,7 @@
 <template>
     <div class="task-details-container">
         <v-row justify="center" align="center" style="min-height: 80vh">
-            <v-col cols="12" sm="8" md="6">
+            <v-col cols="12" sm="4" md="6">
                 <v-card elevation="6" class="pa-4">
                     <v-card-title class="headline font-weight-bold primary--text">
                         {{ $t('taskDetailsTitle') }}
@@ -23,6 +23,9 @@
                                 :class="task.taskDone ? 'green--text font-weight-bold' : 'red--text font-weight-bold'">
                                 {{ task.taskDone ? $t('statusDone') : $t('statusToDo') }}
                             </span>
+                        </div>
+                        <div class="mb-3">
+                            <strong>{{ $t('priorityLabel') }}</strong> {{ $t(task.priority) }}
                         </div>
                         <div>
                             <strong>{{ $t('createdAtLabel') }}</strong> {{ formatDate(task.createdAt) }}

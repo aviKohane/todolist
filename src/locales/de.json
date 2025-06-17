@@ -7,6 +7,7 @@
   "taskDetailsTitle": "Aufgabendetails",
   "taskLabel": "Aufgabe:",
   "descriptionLabel": "Beschreibung:",
+  "priorityLabel": "Priorität:",
   "statusLabel": "Status:",
   "statusDone": "✅ Erledigt",
   "statusToDo": "❌ Zu erledigen",
@@ -22,5 +23,24 @@
   "confirmDeletion": "Löschen bestätigen",
   "confirmDeleteMessage": "Sind Sie sicher, dass Sie die Aufgabe löschen möchten",
   "confirmDeleteButton": "Ja, löschen",
-  "cancel": "Abbrechen"
+  "cancel": "Abbrechen",
+  "noTasksMatchFilters": "Keine Aufgaben entsprechen deinen Filtern.",
+  "noTasksYet": "Noch keine Aufgaben hinzugefügt.",
+  "filterByStatus": "Nach Status filtern",
+  "search": "Suche",
+  "statusAll": "Alle",
+  "todo": "Zu erledigen",
+  "done": "Erledigt",
+  "priorityHigh": "Hohe Priorität",
+  "priorityMedium": "Mittlere Priorität",
+  "priorityLow": "Niedrige Priorität",
+  "taskPriorityLabel": "Aufgabenpriorität",
+  "high": "Hoch",
+  "medium": "Mittel",
+  "low": "Niedrig",
+   "filterByPriority": "Nach Priorität filtern"
 }
+
+
+
+
