@@ -81,7 +81,9 @@ export default {
     logout() {
       this.$store.commit("setCurrentUser", null);
       this.$router.push('/');
-
+      localStorage.removeItem('todoFilterStatus');
+      localStorage.removeItem('todoFilterPriority');
+      localStorage.removeItem('todoFilterSearch');
     }
   }
 };
@@ -92,8 +94,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh; */
+    overflow-y: hidden;
 }
 
 .app-wrapper {
@@ -102,7 +104,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100vh;
+  height: 100%;
+ 
 }
 
 * {

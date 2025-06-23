@@ -7,10 +7,14 @@ export default new Vuex.Store({
     state: {
         users: JSON.parse(localStorage.getItem("users")) || [],
         currentUserId: JSON.parse(localStorage.getItem("currentUserId")) || null,
+        currentUserLanguage: JSON.parse(localStorage.getItem("currentUserLanguage")) || 'en', // valeur par défaut
+
     },
     getters: {
         currentUser: state => state.users.find(u => u.id === state.currentUserId),
         userTasks: (state, getters) => getters.currentUser?.tasks || [],
+        currentLanguage: state => state.currentUserLanguage, 
+
     },
     mutations: {
         setCurrentUser(state, id) {
@@ -43,9 +47,9 @@ export default new Vuex.Store({
             }
 
         },
-        setCurrentLanguage(state,lang){
-            state.currentUserLanguage=lang;
-            localStorage.setItem("currentUserLanguage",JSON.stringify(state.currentUserLanguage))
+        setCurrentLanguage(state, lang) {
+            state.currentUserLanguage = lang;
+            localStorage.setItem("currentUserLanguage", JSON.stringify(state.currentUserLanguage))
         }
     }
 })
