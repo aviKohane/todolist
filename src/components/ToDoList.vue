@@ -32,7 +32,7 @@
                     <v-menu v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y
                         max-width="290" min-width="290" @open="datePickerStep = 'date'">
                         <template #activator="{ on, attrs }">
-                            <v-text-field class="time-date-picker-field" v-model="displayedDateTime" label="Prévu pour"
+                            <v-text-field class="time-date-picker-field" v-model="displayedDateTime" :label="$t('scheduledFor')"
                                 readonly dense prepend-icon="mdi-calendar-clock" v-bind="attrs" v-on="on" />
                         </template>
 

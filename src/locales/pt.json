@@ -38,5 +38,8 @@
   "high": "Alto(a)",
   "medium": "Médio(a)",
   "low": "Baixo(a)",
-  "filterByPriority": "Filtrar por prioridade"
+  "filterByPriority": "Filtrar por prioridade",
+  "scheduledFor": "Previsto para",
+  "next": "Seguinte",
+  "back": "Voltar"
 }

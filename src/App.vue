@@ -44,9 +44,14 @@ export default {
         { label: 'Русский', code: 'ru', flag: 'https://flagcdn.com/w40/ru.png' },
         { label: 'Deutsch', code: 'de', flag: 'https://flagcdn.com/w40/de.png' }
       ]
-
-
-
+    }
+  },
+  watch: {
+    '$i18n.locale': {
+      immediate: true,
+      handler(newLang) {
+        this.$vuetify.lang.current = newLang
+      }
     }
   },
   computed: {
@@ -95,7 +100,7 @@ body {
   margin: 0;
   padding: 0;
   /* height: 100vh; */
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 
 .app-wrapper {
@@ -105,7 +110,7 @@ body {
   text-align: center;
   color: #2c3e50;
   height: 100%;
- 
+
 }
 
 * {

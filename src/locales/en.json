@@ -38,5 +38,8 @@
   "high": "High",
   "medium": "Medium",
   "low": "Low",
-  "filterByPriority": "Filter by priority"
+  "filterByPriority": "Filter by priority",
+  "scheduledFor": "Scheduled for",
+  "next": "Next",
+  "back": "Back"
 }

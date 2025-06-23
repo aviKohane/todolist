@@ -38,5 +38,8 @@
     "high": "Élevé(e)",
     "medium": "Moyen(ne)",
     "low": "Faible",
-    "filterByPriority": "Filtrer par priorité"
+    "filterByPriority": "Filtrer par priorité",
+    "scheduledFor": "Prévu pour",
+    "next": "Suivant",
+    "back": "Retour"
 }
