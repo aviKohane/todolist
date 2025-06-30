@@ -68,7 +68,6 @@
 
         </div>
 
-        <!-- Liste des tâches -->
         <div class="to-do-list-filters">
             <v-select v-model="filterStatus" :items="[
                 { text: $t('statusAll'), value: 'all' },
@@ -84,7 +83,6 @@
             ]" item-text="text" item-value="value" :label="$t('filterByPriority')" dense outlined
                 style="max-width: 200px"></v-select>
             <v-text-field v-model="filterSearch" :label="$t('search')" dense outlined style="max-width: 300px;">
-                <!-- clearable @click:clear="clearSearch" -->
             </v-text-field>
         </div>
         <div class="to-do-list-task-list">
@@ -133,7 +131,6 @@
             </div>
         </div>
 
-        <!-- delete task dialog -->
         <v-dialog v-model="deleteTaskDialog" width="500">
             <v-card>
                 <v-card-title class="headline" style="color:red">
@@ -186,10 +183,10 @@ export default {
                 { value: 'low', color: 'green', label: 'priorityLow' }
             ],
             menu: false,
-            datePickerStep: 'date',   // 'date' ou 'time'
-            selectedDate: null,       // au format YYYY-MM-DD
-            selectedTime: null,       // au format HH:mm (24 h)
-            displayedDateTime: '',    // texte lisible dans le champ
+            datePickerStep: 'date',   
+            selectedDate: null,       
+            selectedTime: null,      
+            displayedDateTime: '',    
 
 
 
@@ -324,9 +321,7 @@ export default {
         saveDateTime() {
             if (this.selectedDate && this.selectedTime) {
                 const fullDateTime = `${this.selectedDate}T${this.selectedTime}`;
-                this.task.dueDate = fullDateTime;   // stocké ISO pour persistance
-
-                // locale dynamique selon la langue du store
+                this.task.dueDate = fullDateTime;   
                 const lang = this.$store.getters.currentLanguage || 'en';
                 const locale = `${lang.toLowerCase()}-${lang.toUpperCase()}`;
 
@@ -338,8 +333,8 @@ export default {
                     minute: '2-digit'
                 });
 
-                this.menu = false;           // ferme le popup
-                this.datePickerStep = 'date'; // réinitialise pour la prochaine fois
+                this.menu = false;         
+                this.datePickerStep = 'date'; 
             }
         },
       

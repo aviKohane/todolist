@@ -9,7 +9,6 @@
 
                     <v-divider class="my-3"></v-divider>
 
-                    <!-- ✅ Détails centrés verticalement dans la carte -->
                     <v-card-text class="flex-grow-1 d-flex align-center justify-center">
                         <div class="task-info text-left" v-if="task">
                             <div class="mb-3">

@@ -1,6 +1,6 @@
 # 📝 ToDoList App
 
-A simple and responsive task management application built with **Vue 2** and **Vuetify**, supporting multiple users and multilingual interface (English 🇬🇧 / French 🇫🇷).  
+A simple and responsive task management application built with **Vue 2** and **Vuetify**, supporting multiple users and multilingual interface.  
 Each user has their own task list stored locally via `localStorage`.
 
 ## 🚀 Features

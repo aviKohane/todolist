@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib/framework'
-
-// Ajout des locales Vuetify
 import en from 'vuetify/es5/locale/en'
 import fr from 'vuetify/es5/locale/fr'
 import es from 'vuetify/es5/locale/es'
@@ -24,6 +22,6 @@ export default new Vuetify({
   },
   lang: {
     locales: { en, fr, es, pt, de, ru, he },
-    current: 'en', // sera automatiquement mis à jour dynamiquement
+    current: 'en',
   }
 })
