@@ -1,16 +1,30 @@
 # 📝 ToDoList App
 
-A simple and responsive task management application built with **Vue 2** and **Vuetify**, supporting multiple users and multilingual interface.  
-Each user has their own task list stored locally via `localStorage`.
+A modern, responsive task management application built with **Vue 2**, **Vuetify**, and **Vuex**, supporting multiple users, internationalization, and dynamic task filtering.
+
+Each user has their own task list stored locally via `localStorage`, with persistent filters and language settings across sessions.
 
 ## 🚀 Features
 
 - ✅ Create, update, and delete tasks
-- ✅ Track task completion status (done / to-do)
-- ✅ Multi-user support via localStorage
-- ✅ Language selector (English / French) with persistence
-- ✅ Responsive design using Vuetify
-- ✅ Persistent data across sessions using fixed po
+- ✅ Track task completion (done / to-do)
+- ✅ Multi-user support via `localStorage`
+- ✅ Language selector with 6 supported languages (EN, FR, ES, PT, RU, DE)
+- ✅ Persistent language and filter settings
+- ✅ Filtering by status (to-do / done), priority (high / medium / low), and keywords
+- ✅ Visual chips showing task statistics (completed, pending, total)
+- ✅ Responsive and accessible UI built with Vuetify and CSS
+- ✅ Dark/light theme readiness (if needed in the future)
+
+## 🧠 Tech Stack
+
+- ⚙️ Vue 2
+- 🎨 Vuetify
+- 🔁 Vuex
+- 🌐 Vue-i18n (multilingual support)
+- 💾 localStorage
+
+---
 
 ## Project setup
 ```
