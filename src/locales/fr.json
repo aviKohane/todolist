@@ -41,5 +41,8 @@
     "filterByPriority": "Filtrer par priorité",
     "scheduledFor": "Prévu pour",
     "next": "Suivant",
-    "back": "Retour"
+    "back": "Retour",
+    "completed": "Terminées",
+    "pending": "En attente",
+    "total": "Total"
 }

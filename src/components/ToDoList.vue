@@ -10,11 +10,13 @@
 
 
         <div class="to-do-list-form">
-            <v-text-field v-model="task.taskName" :label="$t('taskNameLabel')" prepend-inner-icon="mdi-pencil"
-                :error="taskError" required :error-messages="taskError ? [$t('taskNameRequired')] : []" outlined
-                dense />
-            <v-text-field v-model="task.taskDescription" :label="$t('taskDescriptionLabel')"
-                prepend-inner-icon="mdi-text" outlined dense />
+            <div class="task-fields-row">
+                <v-text-field v-model="task.taskName" :label="$t('taskNameLabel')" prepend-inner-icon="mdi-pencil"
+                    :error="taskError" required :error-messages="taskError ? [$t('taskNameRequired')] : []" outlined
+                    dense />
+                <v-text-field v-model="task.taskDescription" :label="$t('taskDescriptionLabel')"
+                    prepend-inner-icon="mdi-text" outlined dense />
+            </div>
             <div class="priority-time-form">
                 <div class="task-priority-field">
                     <v-tooltip v-for="item in taskPriorityItems" :key="item.value" top>
@@ -32,8 +34,9 @@
                     <v-menu v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y
                         max-width="290" min-width="290" @open="datePickerStep = 'date'">
                         <template #activator="{ on, attrs }">
-                            <v-text-field class="time-date-picker-field" v-model="displayedDateTime" :label="$t('scheduledFor')"
-                                readonly dense prepend-icon="mdi-calendar-clock" v-bind="attrs" v-on="on" />
+                            <v-text-field class="time-date-picker-field" v-model="displayedDateTime"
+                                :label="$t('scheduledFor')" readonly dense prepend-icon="mdi-calendar-clock"
+                                v-bind="attrs" v-on="on" />
                         </template>
 
                         <v-card>
@@ -64,27 +67,24 @@
                     {{ $t('addTask') }}
                 </v-btn>
             </div>
-
-
         </div>
 
         <div class="to-do-list-filters">
-            <v-select v-model="filterStatus" :items="[
+            <v-select class="filter-field" v-model="filterStatus" :items="[
                 { text: $t('statusAll'), value: 'all' },
                 { text: $t('todo'), value: 'todo' },
                 { text: $t('done'), value: 'done' }
-            ]" item-text="text" item-value="value" :label="$t('filterByStatus')" dense outlined
-                style="max-width: 200px;" />
-            <v-select v-model="filterPriority" :items="[
+            ]" item-text="text" item-value="value" :label="$t('filterByStatus')" dense outlined />
+            <v-select class="filter-field" v-model="filterPriority" :items="[
                 { text: $t('statusAll'), value: 'all' },
                 { text: $t('high'), value: 'high' },
                 { text: $t('medium'), value: 'medium' },
                 { text: $t('low'), value: 'low' }
-            ]" item-text="text" item-value="value" :label="$t('filterByPriority')" dense outlined
-                style="max-width: 200px"></v-select>
-            <v-text-field v-model="filterSearch" :label="$t('search')" dense outlined style="max-width: 300px;">
+            ]" item-text="text" item-value="value" :label="$t('filterByPriority')" dense outlined></v-select>
+            <v-text-field class="filter-field" v-model="filterSearch" :label="$t('search')" dense outlined>
             </v-text-field>
         </div>
+
         <div class="to-do-list-task-list">
             <v-card elevation="5" v-if="userTasks.length > 0" class="task-list-container">
                 <v-list dense class="task-scroll-wrapper">
@@ -104,9 +104,14 @@
                                 <v-icon :color="getPriorityColor(taskItem.priority)">mdi-tag-outline</v-icon>
                             </v-col>
                             <v-col cols="6" xs="6">
-                                <div :class="['font-weight-bold', taskItem.taskDone ? 'task-done' : '']">
+                                <div :class="[
+                                    'font-weight-bold',
+                                    taskItem.taskDone ? 'task-done' : '',
+                                    isOverdue(taskItem) ? 'red--text text--accent-4' : ''
+                                ]">
                                     {{ taskItem.taskName }}
                                 </div>
+
                             </v-col>
                             <v-col cols="2" xs="2" class="d-flex justify-end">
                                 <router-link :to="{ name: 'taskDetails', params: { index } }">
@@ -129,8 +134,21 @@
                     }}
                 </div>
             </div>
-        </div>
 
+        </div>
+        <!-- total -->
+        <div class="tasks-totals">
+            <v-chip color="green" text-color="white">
+                  {{ doneTasks.length }} {{ $t('completed') }}
+            </v-chip>
+            <v-chip color="red" text-color="white">
+                 {{ pendingTasks.length }} {{ $t('pending') }}
+            </v-chip>
+            <v-chip color="blue" text-color="white">
+                {{ filteredTasks.length }} {{ $t('total') }}
+            </v-chip>
+        </div>
+        <!-- end -->
         <v-dialog v-model="deleteTaskDialog" width="500">
             <v-card>
                 <v-card-title class="headline" style="color:red">
@@ -183,10 +201,10 @@ export default {
                 { value: 'low', color: 'green', label: 'priorityLow' }
             ],
             menu: false,
-            datePickerStep: 'date',   
-            selectedDate: null,       
-            selectedTime: null,      
-            displayedDateTime: '',    
+            datePickerStep: 'date',
+            selectedDate: null,
+            selectedTime: null,
+            displayedDateTime: '',
 
 
 
@@ -207,7 +225,6 @@ export default {
             localStorage.setItem('todoFilterPriority', val);
         },
         filterSearch(val) {
-            console.log("watch ==> filterSearch =", val)
             localStorage.setItem('todoFilterSearch', val);
         }
     },
@@ -223,7 +240,6 @@ export default {
         this.filterPriority = localStorage.getItem('todoFilterPriority') || 'all';
         const storedSearch = localStorage.getItem('todoFilterSearch');
         this.filterSearch = storedSearch !== null ? storedSearch : '';
-        console.log("this.filterSearch =", this.filterSearch)
     },
     computed: {
         userTasks() {
@@ -261,6 +277,13 @@ export default {
             return tasks;
 
         },
+        doneTasks() {
+            return this.filteredTasks.filter(t => t.taskDone);
+        },
+        pendingTasks() {
+            return this.filteredTasks.filter(t => !t.taskDone);
+        }
+
 
     },
     methods: {
@@ -321,7 +344,7 @@ export default {
         saveDateTime() {
             if (this.selectedDate && this.selectedTime) {
                 const fullDateTime = `${this.selectedDate}T${this.selectedTime}`;
-                this.task.dueDate = fullDateTime;   
+                this.task.dueDate = fullDateTime;
                 const lang = this.$store.getters.currentLanguage || 'en';
                 const locale = `${lang.toLowerCase()}-${lang.toUpperCase()}`;
 
@@ -333,11 +356,16 @@ export default {
                     minute: '2-digit'
                 });
 
-                this.menu = false;         
-                this.datePickerStep = 'date'; 
+                this.menu = false;
+                this.datePickerStep = 'date';
             }
         },
-      
+        isOverdue(task) {
+            if (!task.dueDate || task.taskDone) return false;
+            return new Date(task.dueDate) < new Date();
+        }
+
+
     }
 }
 </script>
@@ -367,7 +395,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     font-size: 22px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0 16px;
@@ -393,13 +421,21 @@ export default {
 }
 
 .to-do-list-filters {
-    height: 4%;
-    /* background-color: grey; */
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding-bottom: 50px;
+    gap: 16px;
+    justify-content: center;
 }
+
+.filter-field {
+    max-width: 150px;
+}
+
+/* @media screen and (max-width: 780px) {
+    .filter-field {
+        min-width: 50px;
+    }
+} */
 
 .to-do-list-task-list {
     height: 45%;
@@ -410,16 +446,35 @@ export default {
     padding: 10px;
 }
 
+.task-fields-row {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.task-field {
+    flex: 1;
+}
+
+@media screen and (max-height: 700px) {
+    .task-fields-row {
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+
 .priority-time-form {
     display: flex;
     flex-direction: row;
     padding-bottom: 20px;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 16px;
 }
 
 .task-date-field {
-    width: 45%;
+    width: 50%;
+    margin-bottom: 3px;
 }
 
 .time-date-picker-field {
@@ -433,11 +488,11 @@ export default {
     display: flex;
     align-content: center;
     justify-content: center;
-    width: 45%;
+    width: 50%;
     gap: 20%;
     border: 1px solid grey;
     border-radius: 4px;
-    height: 40px;
+    height: 41px;
     padding: 0 10%;
 }
 
@@ -477,5 +532,13 @@ export default {
     width: 32px;
     height: 32px;
     min-width: 32px;
+}
+
+.tasks-totals {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px 0 5px 0;
+    gap: 16px;
 }
 </style>

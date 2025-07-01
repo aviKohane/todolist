@@ -41,5 +41,8 @@
   "filterByPriority": "Фильтр по приоритету",
   "scheduledFor": "Запланировано на",
   "next": "Далее",
-  "back": "Назад"
+  "back": "Назад",
+  "completed": "Завершено",
+  "pending": "В ожидании",
+  "total": "Всего"
 }

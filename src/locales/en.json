@@ -41,5 +41,8 @@
   "filterByPriority": "Filter by priority",
   "scheduledFor": "Scheduled for",
   "next": "Next",
-  "back": "Back"
+  "back": "Back",
+  "completed": "Completed",
+  "pending": "Pending",
+  "total": "Total"
 }
