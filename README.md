@@ -14,7 +14,7 @@ Each user has their own task list stored locally via `localStorage`, with persis
 - ✅ Filtering by status (to-do / done), priority (high / medium / low), and keywords
 - ✅ Visual chips showing task statistics (completed, pending, total)
 - ✅ Responsive and accessible UI built with Vuetify and CSS
-- ✅ Dark/light theme readiness (if needed in the future)
+- ✅ Dark/light theme readiness 
 
 ## 🧠 Tech Stack
 

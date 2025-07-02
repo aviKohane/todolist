@@ -7,13 +7,14 @@ export default new Vuex.Store({
     state: {
         users: JSON.parse(localStorage.getItem("users")) || [],
         currentUserId: JSON.parse(localStorage.getItem("currentUserId")) || null,
-        currentUserLanguage: JSON.parse(localStorage.getItem("currentUserLanguage")) || 'en', // valeur par défaut
-
+        currentUserLanguage: JSON.parse(localStorage.getItem("currentUserLanguage")) || 'en',
+        isDarkMode: localStorage.getItem('darkMode') === 'true'
     },
     getters: {
         currentUser: state => state.users.find(u => u.id === state.currentUserId),
         userTasks: (state, getters) => getters.currentUser?.tasks || [],
-        currentLanguage: state => state.currentUserLanguage, 
+        currentLanguage: state => state.currentUserLanguage,
+        isDarkMode: state => state.isDarkMode,
 
     },
     mutations: {
@@ -50,6 +51,14 @@ export default new Vuex.Store({
         setCurrentLanguage(state, lang) {
             state.currentUserLanguage = lang;
             localStorage.setItem("currentUserLanguage", JSON.stringify(state.currentUserLanguage))
+        },
+        toggleDarkMode(state) {
+            state.isDarkMode = !state.isDarkMode;
+            localStorage.setItem('darkMode', state.isDarkMode);
+        },
+        setDarkMode(state, value) {
+            state.isDarkMode = value;
+            localStorage.setItem('darkMode', value);
         }
     }
 })

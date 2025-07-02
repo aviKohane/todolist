@@ -25,7 +25,11 @@
           </template>
         </v-select>
       </div>
+       <v-btn icon @click="toggleDarkMode">
+        <v-icon>{{ isDarkMode ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+      </v-btn>
     </div>
+  
     <router-view />
   </v-app>
 </template>
@@ -69,6 +73,9 @@ export default {
         default:
           return '';
       }
+    },
+     isDarkMode() {
+      return this.$store.state.isDarkMode;
     }
 
   },
@@ -89,6 +96,10 @@ export default {
       localStorage.removeItem('todoFilterStatus');
       localStorage.removeItem('todoFilterPriority');
       localStorage.removeItem('todoFilterSearch');
+    },
+     toggleDarkMode() {
+      this.$store.commit('toggleDarkMode');
+      this.$vuetify.theme.dark = this.isDarkMode;
     }
   }
 };
@@ -157,7 +168,9 @@ body {
   min-height: 40px;
 
 }
-
+.logout-label, .lang-label {
+  color: black !important;
+}
 @media(max-width:550px) {
 
   .btn-wrapper,
